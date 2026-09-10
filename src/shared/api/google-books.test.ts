@@ -30,6 +30,17 @@ describe('searchVolumes', () => {
     expect(calledUrl).toContain('printType=magazines');
   });
 
+  it('sends orderBy only when it differs from the default "relevance"', async () => {
+    const spy = vi
+      .spyOn(httpClient, 'httpGet')
+      .mockResolvedValue({ totalItems: 0 });
+
+    await searchVolumes({ q: 'dune', orderBy: 'newest' });
+
+    const calledUrl = spy.mock.calls[0]?.[0] as string;
+    expect(calledUrl).toContain('orderBy=newest');
+  });
+
   it('only appends the API key when VITE_GOOGLE_BOOKS_API_KEY is set', async () => {
     vi.stubEnv('VITE_GOOGLE_BOOKS_API_KEY', 'test-key');
     const spy = vi

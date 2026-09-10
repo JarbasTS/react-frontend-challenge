@@ -19,6 +19,10 @@ coverage/
 !.vscode/extensions.json
 .idea/
 
+# docs
+docs/
+
+
 # logs
 *.log
 npm-debug.log*

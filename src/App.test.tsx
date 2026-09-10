@@ -1,11 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import { screen } from '@testing-library/react';
-import { renderWithProviders } from '@test/render-with-providers';
+import { render, screen } from '@testing-library/react';
 import { App } from './App';
 
 describe('App', () => {
-  it('renders without crashing', () => {
-    renderWithProviders(<App />);
-    expect(screen.getByText('Libris')).toBeInTheDocument();
+  it('boots and redirects an unauthenticated visitor to the login page', async () => {
+    render(<App />);
+    expect(await screen.findByText('Libris')).toBeInTheDocument();
+    expect(
+      await screen.findByRole('heading', { name: /libris/i })
+    ).toBeInTheDocument();
   });
 });

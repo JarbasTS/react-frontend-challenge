@@ -1,7 +1,20 @@
+import { QueryClientProvider } from '@tanstack/react-query';
+import { RouterProvider } from '@tanstack/react-router';
+import { queryClient } from '@app/providers/query-client';
+import { ThemeProvider } from '@app/providers/theme-provider';
+import { router } from '@app/router/router';
+import { useThemeStore } from '@shared/lib/theme-store';
+import { Toaster } from '@shared/ui/sonner';
+
 export function App() {
+  const theme = useThemeStore((state) => state.theme);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background text-foreground">
-      <h1 className="font-display text-3xl font-semibold">Libris</h1>
-    </div>
+    <ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <Toaster theme={theme} />
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 }

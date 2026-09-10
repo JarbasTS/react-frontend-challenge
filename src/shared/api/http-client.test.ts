@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { HttpError, httpGet } from './http-client';
+import { HttpError, httpGet, shouldRetryOnServerError } from './http-client';
 
 describe('httpGet', () => {
   afterEach(() => {
@@ -39,5 +39,17 @@ describe('httpGet', () => {
     vi.stubGlobal('fetch', fetchMock);
 
     await expect(httpGet('https://example.com')).rejects.toThrow('network down');
+  });
+});
+
+describe('shouldRetryOnServerError', () => {
+  it('does not retry a 4xx HttpError (e.g. 429 rate limit)', () => {
+    expect(shouldRetryOnServerError(0, new HttpError(429, 'Too Many Requests'))).toBe(false);
+  });
+
+  it('retries a non-HttpError up to 3 times', () => {
+    expect(shouldRetryOnServerError(0, new Error('network down'))).toBe(true);
+    expect(shouldRetryOnServerError(2, new Error('network down'))).toBe(true);
+    expect(shouldRetryOnServerError(3, new Error('network down'))).toBe(false);
   });
 });
