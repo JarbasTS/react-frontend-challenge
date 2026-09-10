@@ -1,0 +1,145 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  Libris — "sala de leitura / ficha de biblioteca".
+  Paleta e tipografia documentadas em docs/design.md (skill de design) e
+  aplicadas aqui: tinta, papel, latão (acento), carimbo-ameixa e
+  encadernação-verde, com vermelho de carimbo reservado a erros.
+*/
+:root {
+  --ink: #211f1b;
+  --paper-desk: #e4e1d5;
+  --paper-card: #f7f5ec;
+  --brass: #93701f;
+  --brass-foreground: #faf8f0;
+  --plum: #5b2a4d;
+  --plum-foreground: #f5edf2;
+  --forest: #34503c;
+  --forest-foreground: #eef3ee;
+  --stamp-red: #a13d2b;
+  --stamp-red-foreground: #fbeeea;
+
+  --background: var(--paper-desk);
+  --foreground: var(--ink);
+  --card: var(--paper-card);
+  --card-foreground: var(--ink);
+  --popover: var(--paper-card);
+  --popover-foreground: var(--ink);
+  --primary: var(--brass);
+  --primary-foreground: var(--brass-foreground);
+  --secondary: var(--plum);
+  --secondary-foreground: var(--plum-foreground);
+  --muted: #d6d3c6;
+  --muted-foreground: #6b6656;
+  --accent: #eee9d8;
+  --accent-foreground: var(--ink);
+  --destructive: var(--stamp-red);
+  --destructive-foreground: var(--stamp-red-foreground);
+  --border: #c9c5b4;
+  --input: #c9c5b4;
+  --ring: var(--brass);
+  --radius: 0.375rem;
+
+  --status-want: var(--brass);
+  --status-want-foreground: var(--brass-foreground);
+  --status-reading: var(--plum);
+  --status-reading-foreground: var(--plum-foreground);
+  --status-done: var(--forest);
+  --status-done-foreground: var(--forest-foreground);
+}
+
+.dark {
+  --ink: #edeae0;
+  --brass: #d3a54c;
+  --brass-foreground: #201804;
+  --plum: #8a5a80;
+  --plum-foreground: #f6ecf2;
+  --forest: #5c8267;
+  --forest-foreground: #121b14;
+  --stamp-red: #d9614a;
+  --stamp-red-foreground: #2a0a05;
+
+  --background: #14171c;
+  --foreground: var(--ink);
+  --card: #1b1f26;
+  --card-foreground: var(--ink);
+  --popover: #1b1f26;
+  --popover-foreground: var(--ink);
+  --primary: var(--brass);
+  --primary-foreground: var(--brass-foreground);
+  --secondary: var(--plum);
+  --secondary-foreground: var(--plum-foreground);
+  --muted: #262b33;
+  --muted-foreground: #9a9686;
+  --accent: #262115;
+  --accent-foreground: var(--ink);
+  --destructive: var(--stamp-red);
+  --destructive-foreground: var(--stamp-red-foreground);
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.14);
+  --ring: var(--brass);
+
+  --status-want: var(--brass);
+  --status-want-foreground: var(--brass-foreground);
+  --status-reading: var(--plum);
+  --status-reading-foreground: var(--plum-foreground);
+  --status-done: var(--forest);
+  --status-done-foreground: var(--forest-foreground);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-status-want: var(--status-want);
+  --color-status-want-foreground: var(--status-want-foreground);
+  --color-status-reading: var(--status-reading);
+  --color-status-reading-foreground: var(--status-reading-foreground);
+  --color-status-done: var(--status-done);
+  --color-status-done-foreground: var(--status-done-foreground);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Fraunces', ui-serif, Georgia, serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+  }
+}
